@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ustawienia pogody</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main class="settings">
+    <h1>Ustawienia pogody</h1>
+
+    <p class="description">
+      Wpisz pełny adres strony wybranego paczkomatu InPost.
+      Rozszerzenie pobierze z niej nazwę, adres oraz współrzędne lokalizacji.
+    </p>
+
+    <form id="settings-form">
+      <label for="locker-url">
+        Adres strony paczkomatu InPost
+      </label>
+
+      <input
+        id="locker-url"
+        name="locker-url"
+        type="url"
+        placeholder="https://inpost.pl/paczkomat-..."
+        required
+      >
+
+      <button type="submit">
+        Zapisz i pobierz dane
+      </button>
+    </form>
+
+    <p id="status" class="status"></p>
+
+    <section id="preview" class="preview hidden">
+      <h2>Rozpoznany paczkomat</h2>
+
+      <dl>
+        <dt>Nazwa</dt>
+        <dd id="preview-name"></dd>
+
+        <dt>Adres</dt>
+        <dd id="preview-address"></dd>
+
+        <dt>Współrzędne</dt>
+        <dd id="preview-coordinates"></dd>
+      </dl>
+    </section>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

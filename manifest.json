@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "InPogodynka",
+  "version": "2.2.0",
+  "description": "InPogodynka — aktualna pogoda, historia temperatur, prognoza i jakość powietrza przy paczkomacie.",
+
+  "permissions": [
+    "alarms",
+    "storage",
+    "tabs"
+  ],
+
+  "host_permissions": [
+    "https://api.open-meteo.com/*",
+    "https://inpost.pl/*",
+    "https://danepubliczne.imgw.pl/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "options_page": "options.html",
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://inpost.pl/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
+  "action": {
+    "default_title": "InPogodynka — pogoda przy paczkomacie",
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  }
+}

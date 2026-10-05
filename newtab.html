@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    InPogodynka 2.2 — pogoda przy paczkomacie
+  </title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="container">
+
+    <header class="header">
+      <div class="app-header-content">
+        <p class="eyebrow">
+          InPogodynka
+        </p>
+
+        <p class="app-subtitle">
+          Pogoda i jakość powietrza przy paczkomacie
+        </p>
+
+        <h1 id="locker-name">
+          Ustaw paczkomat w konfiguracji
+        </h1>
+
+        <p id="locker-address" class="address">
+          Otwórz ustawienia rozszerzenia
+        </p>
+      </div>
+
+      <div class="header-actions">
+        <button
+          id="refresh-button"
+          class="refresh-button"
+          type="button"
+        >
+          Odśwież
+        </button>
+
+        <button
+          id="settings-button"
+          class="settings-button"
+          type="button"
+        >
+          Ustawienia
+        </button>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">01</p>
+
+          <div>
+            <h2>Dane z paczkomatu InPost</h2>
+
+            <p class="section-description">
+              Lokalne dane odczytane ze strony paczkomatu.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          InPost
+        </span>
+      </div>
+
+      <div class="subsection">
+        <h3>Jakość powietrza</h3>
+
+        <div class="air-quality-grid">
+
+          <article
+            id="air-card-pm25"
+            class="air-card air-level-none"
+          >
+            <div class="air-card-header">
+              <div class="air-card-title">
+                <span>PM 2,5</span>
+
+                <button
+                  id="info-pm25"
+                  class="info-button"
+                  type="button"
+                  aria-label="Informacje o PM2,5"
+                  aria-describedby="tooltip-pm25"
+                >
+                  i
+                </button>
+
+                <div
+                  id="tooltip-pm25"
+                  class="tooltip"
+                  role="tooltip"
+                >
+                  <strong>PM2,5</strong>
+
+                  <p>
+                    Drobny pył zawieszony o średnicy
+                    nie większej niż 2,5 µm.
+                  </p>
+
+                  <p>
+                    Tak małe cząstki mogą przenikać głęboko
+                    do płuc i stanowić zagrożenie dla zdrowia.
+                  </p>
+
+                  <p>
+                    Jednostka:
+                    <strong>µg/m³</strong>.
+                    Wyższa wartość oznacza większe stężenie pyłu.
+                  </p>
+
+                  <p
+                    id="tooltip-level-pm25"
+                    class="tooltip-level"
+                  >
+                    Brak danych o poziomie.
+                  </p>
+                </div>
+              </div>
+
+              <span
+                id="level-pm25"
+                class="air-level-label"
+              >
+                Brak danych
+              </span>
+            </div>
+
+            <strong
+              id="sensor-pm25"
+              class="air-value"
+            >
+              --
+            </strong>
+
+            <span
+              id="sensor-p-pm25"
+              class="air-percent"
+            ></span>
+          </article>
+
+          <article
+            id="air-card-pm10"
+            class="air-card air-level-none"
+          >
+            <div class="air-card-header">
+              <div class="air-card-title">
+                <span>PM 10</span>
+
+                <button
+                  id="info-pm10"
+                  class="info-button"
+                  type="button"
+                  aria-label="Informacje o PM10"
+                  aria-describedby="tooltip-pm10"
+                >
+                  i
+                </button>
+
+                <div
+                  id="tooltip-pm10"
+                  class="tooltip"
+                  role="tooltip"
+                >
+                  <strong>PM10</strong>
+
+                  <p>
+                    Pył zawieszony o średnicy
+                    nie większej niż 10 µm.
+                  </p>
+
+                  <p>
+                    Może podrażniać drogi oddechowe
+                    i nasilać objawy astmy.
+                  </p>
+
+                  <p>
+                    Jednostka:
+                    <strong>µg/m³</strong>.
+                    Wyższa wartość oznacza większe stężenie pyłu.
+                  </p>
+
+                  <p
+                    id="tooltip-level-pm10"
+                    class="tooltip-level"
+                  >
+                    Brak danych o poziomie.
+                  </p>
+                </div>
+              </div>
+
+              <span
+                id="level-pm10"
+                class="air-level-label"
+              >
+                Brak danych
+              </span>
+            </div>
+
+            <strong
+              id="sensor-pm10"
+              class="air-value"
+            >
+              --
+            </strong>
+
+            <span
+              id="sensor-p-pm10"
+              class="air-percent"
+            ></span>
+          </article>
+
+          <article
+            id="air-card-o3"
+            class="air-card air-level-none"
+          >
+            <div class="air-card-header">
+              <div class="air-card-title">
+                <span>O₃</span>
+
+                <button
+                  id="info-o3"
+                  class="info-button"
+                  type="button"
+                  aria-label="Informacje o ozonie"
+                  aria-describedby="tooltip-o3"
+                >
+                  i
+                </button>
+
+                <div
+                  id="tooltip-o3"
+                  class="tooltip"
+                  role="tooltip"
+                >
+                  <strong>O₃ — ozon</strong>
+
+                  <p>
+                    Ozon przy powierzchni ziemi może
+                    podrażniać oczy i drogi oddechowe.
+                  </p>
+
+                  <p>
+                    Szczególną ostrożność powinny zachować
+                    dzieci, seniorzy i osoby z astmą.
+                  </p>
+
+                  <p>
+                    Jednostka:
+                    <strong>µg/m³</strong>.
+                  </p>
+
+                  <p
+                    id="tooltip-level-o3"
+                    class="tooltip-level"
+                  >
+                    Brak danych o poziomie.
+                  </p>
+                </div>
+              </div>
+
+              <span
+                id="level-o3"
+                class="air-level-label"
+              >
+                Brak danych
+              </span>
+            </div>
+
+            <strong
+              id="sensor-o3"
+              class="air-value"
+            >
+              --
+            </strong>
+
+            <span
+              id="sensor-p-o3"
+              class="air-percent"
+            ></span>
+          </article>
+
+          <article
+            id="air-card-no2"
+            class="air-card air-level-none"
+          >
+            <div class="air-card-header">
+              <div class="air-card-title">
+                <span>NO₂</span>
+
+                <button
+                  id="info-no2"
+                  class="info-button"
+                  type="button"
+                  aria-label="Informacje o dwutlenku azotu"
+                  aria-describedby="tooltip-no2"
+                >
+                  i
+                </button>
+
+                <div
+                  id="tooltip-no2"
+                  class="tooltip"
+                  role="tooltip"
+                >
+                  <strong>NO₂ — dwutlenek azotu</strong>
+
+                  <p>
+                    Powstaje głównie podczas spalania paliw.
+                  </p>
+
+                  <p>
+                    Podwyższone stężenia mogą podrażniać
+                    drogi oddechowe.
+                  </p>
+
+                  <p>
+                    Jednostka:
+                    <strong>µg/m³</strong>.
+                  </p>
+
+                  <p
+                    id="tooltip-level-no2"
+                    class="tooltip-level"
+                  >
+                    Brak danych o poziomie.
+                  </p>
+                </div>
+              </div>
+
+              <span
+                id="level-no2"
+                class="air-level-label"
+              >
+                Brak danych
+              </span>
+            </div>
+
+            <strong
+              id="sensor-no2"
+              class="air-value"
+            >
+              --
+            </strong>
+
+            <span
+              id="sensor-p-no2"
+              class="air-percent"
+            ></span>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>Warunki atmosferyczne</h3>
+
+        <div class="sensor-grid atmospheric-grid">
+          <div class="sensor">
+            <span>Temperatura</span>
+
+            <strong id="inpost-temperature">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Ciśnienie</span>
+
+            <strong id="inpost-pressure">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Wilgotność</span>
+
+            <strong id="inpost-humidity">
+              --
+            </strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">02</p>
+
+          <div>
+            <h2>Aktualna pogoda z Open-Meteo</h2>
+
+            <p class="section-description">
+              Bieżące dane dla współrzędnych paczkomatu.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          Open-Meteo
+        </span>
+      </div>
+
+      <div class="current-weather-grid">
+        <div class="current-weather-item current-temperature-item">
+          <span>Temperatura</span>
+
+          <strong
+            id="current-temperature"
+            class="current-temperature"
+          >
+            -- °C
+          </strong>
+
+          <small id="current-time">
+            Brak danych
+          </small>
+        </div>
+
+        <div class="current-weather-item">
+          <span>Wilgotność</span>
+
+          <strong id="current-humidity">
+            -- %
+          </strong>
+        </div>
+
+        <div class="current-weather-item">
+          <span>Ciśnienie</span>
+
+          <strong id="current-pressure">
+            -- hPa
+          </strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">03</p>
+
+          <div>
+            <h2>Temperatura historyczna</h2>
+
+            <p class="section-description">
+              Ostatnie 25 godzin — pomiar co 2 godziny.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          Open-Meteo
+        </span>
+      </div>
+
+      <div
+        id="temperature-chart"
+        class="temperature-chart"
+      >
+        <p class="muted">
+          Brak danych historycznych.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">04</p>
+
+          <div>
+            <h2>Prognoza Open-Meteo — 5 dni</h2>
+
+            <p class="section-description">
+              Temperatura, opady i ciśnienie dla lokalizacji paczkomatu.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          Open-Meteo
+        </span>
+      </div>
+
+      <div
+        id="open-meteo-forecast"
+        class="forecast-grid"
+      >
+        <p class="muted">
+          Brak prognozy.
+        </p>
+      </div>
+    </section>
+
+    <section
+      id="imgw-section"
+      class="card imgw-card"
+    >
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">05</p>
+
+          <div>
+            <h2>Pomiar IMGW ze stacji</h2>
+
+            <p class="section-description">
+              Rzeczywisty pomiar z najbliższej dostępnej stacji IMGW-PIB.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          IMGW-PIB
+        </span>
+      </div>
+
+      <div
+        id="imgw-message"
+        class="muted"
+      >
+        Ładowanie danych IMGW…
+      </div>
+
+      <div
+        id="imgw-content"
+        hidden
+      >
+        <div class="imgw-station-info">
+          <h3 id="imgw-station-name">
+            Brak danych
+          </h3>
+
+          <p id="imgw-station-coordinates">
+            Położenie stacji: brak danych
+          </p>
+
+          <p id="imgw-station-distance">
+            Odległość od paczkomatu: brak danych
+          </p>
+
+          <p id="imgw-station-altitude">
+            Wysokość: brak danych
+          </p>
+
+          <p id="imgw-observation-time">
+            Czas pomiaru: brak danych
+          </p>
+        </div>
+
+        <div class="sensor-grid imgw-grid">
+          <div class="sensor">
+            <span>Temperatura</span>
+
+            <strong id="imgw-temperature">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Wilgotność</span>
+
+            <strong id="imgw-humidity">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Wiatr</span>
+
+            <strong id="imgw-wind">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Kierunek wiatru</span>
+
+            <strong id="imgw-wind-direction">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Poryw 10 min</span>
+
+            <strong id="imgw-wind-gust">
+              --
+            </strong>
+          </div>
+
+          <div class="sensor">
+            <span>Opad 10 min</span>
+
+            <strong id="imgw-precipitation">
+              --
+            </strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-heading">
+        <div class="section-title">
+          <p class="section-number">06</p>
+
+          <div>
+            <h2>Historia pobrań rozszerzenia</h2>
+
+            <p class="section-description">
+              Ostatnie temperatury zapisane przez InPogodynkę.
+            </p>
+          </div>
+        </div>
+
+        <span class="source-label">
+          InPogodynka
+        </span>
+      </div>
+
+      <div
+        id="temperature-history"
+        class="temperature-history"
+      >
+        <p class="muted">
+          Brak historii pobrań.
+        </p>
+      </div>
+    </section>
+
+    <footer class="app-footer">
+      <div class="footer-status">
+        <span id="last-update">
+          Ostatnia aktualizacja: brak danych
+        </span>
+
+        <span id="error-message"></span>
+      </div>
+
+      <div class="footer-app-info">
+        <span class="footer-app-name">
+          InPogodynka
+        </span>
+
+        <span>
+          wersja 2.2
+        </span>
+
+        <span>
+          Autor:
+          <strong>Tomasz Wydra</strong>
+        </span>
+
+        <a
+          href="https://www.wydra.waw.pl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          www.wydra.waw.pl
+        </a>
+      </div>
+
+      <div class="footer-sources">
+        <p>
+          Lokalizacja paczkomatu:
+          <a
+            href="https://inpost.pl/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            InPost
+          </a>.
+        </p>
+
+        <p>
+          Prognoza i historia temperatury:
+          <a
+            href="https://open-meteo.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open-Meteo
+          </a>.
+        </p>
+
+        <p>
+          Pomiary ze stacji:
+          <a
+            href="https://danepubliczne.imgw.pl/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            IMGW-PIB
+          </a>.
+        </p>
+
+        <p>
+          Źródłem pochodzenia danych IMGW-PIB jest
+          Instytut Meteorologii i Gospodarki Wodnej –
+          Państwowy Instytut Badawczy.
+          Dane IMGW-PIB zostały przetworzone.
+        </p>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="newtab.js"></script>
+</body>
+</html>
